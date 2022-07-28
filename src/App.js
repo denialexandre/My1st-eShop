@@ -17,10 +17,10 @@ function App() {
         <Navbar />
         {/*show ? <Counter show={show} /> : null*/}
         <Counter show={show} stock={7} initial={1} onAdd={handleOnAdd}/>
-        <ItemListContainer show={show} setShow={setShow} greeting="Welcome to my eShop!" />
         <p>
           ¡Hey, planet!
         </p>
+        <ItemListContainer show={show} setShow={setShow} greeting="Welcome to my eShop!" />
       </header>
     </div>
   );

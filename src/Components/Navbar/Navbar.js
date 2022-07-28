@@ -3,17 +3,17 @@ import CartWidget from '../CartWidget/CartWidget'
 
 const Navbar = () => {
     return(
-        <nav>
+        <nav className = 'Navbar'>
             <div>
-                Deni Alexandre's eShop
+            Deni Alexandre's | eShop
+            </div>
+            <div className="Categories">
+                <button className="Option">Apuntes de ITAM</button>
+                <button className="Option">Consulting Services</button>
+                <button className="Option">Miscelaneous</button>
             </div>
             <CartWidget />
-            <div>
-                <button>Apuntes de ITAM</button>
-                <button>Consulting Services</button>
-                <button>Miscelaneous</button>
-            </div>
-        </nav>
+        </nav>    
     )
 }
 
