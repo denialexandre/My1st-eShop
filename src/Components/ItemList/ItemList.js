@@ -1,8 +1,10 @@
+import Item from "../Item/Item"
+
 const ItemList = ({ products }) => {
     return (
         <ul>
             {products.map(product => (
-            <li key={product.id}>{product.name}</li>
+                <Item product={product} />
             ))}
         </ul>
     )

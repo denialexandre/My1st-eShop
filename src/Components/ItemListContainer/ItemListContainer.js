@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { getProducts } from "../../AsyncMock"
+import ItemList from '../ItemList/ItemList'
 
 const ItemListContainer = ({ greeting, setShow, show }) => {
     const [products, setProducts] = useState ([])
@@ -28,6 +29,7 @@ if (loader) {
     return (
         <>
             <h1>{greeting}</h1>
+            <ItemList products = { products } />
             <button onClick={() => setShow(!show)}>Show/Hide</button>
         </>        
     )
