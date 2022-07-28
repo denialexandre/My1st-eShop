@@ -10,7 +10,7 @@ const Navbar = () => {
             <CartWidget />
             <div>
                 <button>Apuntes de ITAM</button>
-                <button>Professional Services</button>
+                <button>Consulting Services</button>
                 <button>Miscelaneous</button>
             </div>
         </nav>
