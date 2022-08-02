@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { getProducts } from "../../AsyncMock"
 import ItemList from '../ItemList/ItemList'
 
-const ItemListContainer = ({ greeting, setShow, show }) => {
+const ItemListContainer = ({ greeting, setPage }) => {
     const [products, setProducts] = useState ([])
     const [loader, setLoader] = useState (true)
 
@@ -29,7 +29,7 @@ if (loader) {
     return (
         <>
             <h1>{greeting}</h1>
-            <ItemList products = { products } />
+            <ItemList products={products} setPage={setPage}/>
             {/*<button onClick={() => setShow(!show)}>Show/Hide</button>*/}
         </>        
     )

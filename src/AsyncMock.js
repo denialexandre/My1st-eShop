@@ -4,7 +4,7 @@ const products = [
         name: 'Evaluación de Proyecto de Inversión',
         price: 15000,
         category: 'Consulting Services',
-        img: '../public/Images/1.jpg',
+        img: 'Images/cart.svg',
         stock: 10,
         description: 'Descripción del servicio profesional blah bla blah',
     },
@@ -14,8 +14,7 @@ const products = [
         name: 'Investigación de Mercado y Competidores',
         price: 10000,
         category: 'Apuntes de ITAM',
-        img: '../public/Images/2.jpg',
-        //img: 'Images/cart.svg',
+        img: 'Images/cart.svg',
         stock: 5,
         description: 'Descripción del servicio profesional blah bla blah',
     },
@@ -25,7 +24,7 @@ const products = [
         name: 'Mejorar los profits de mi negocio actual',
         price: 12000,
         category: 'Miscelaneous',
-        img: '../public/Images/3.jpg',
+        img: 'Images/cart.svg',
         stock: 7,
         description: 'Descripción del servicio profesional blah bla blah',
     },
@@ -35,6 +34,14 @@ export const getProducts = () => {
     return new Promise ((resolve) => {
         setTimeout (() => {
             resolve (products)
-        }, 2000)
+        }, 500)
     })
 }
+
+export const getProductById = (id) => {
+    return new Promise (resolve => {
+        setTimeout(() => {
+            resolve(products.find(prod => prod.id === id))
+        }, 500)
+    })
+} 

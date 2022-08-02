@@ -4,9 +4,7 @@ import CartWidget from '../CartWidget/CartWidget'
 const Navbar = () => {
     return(
         <nav className = 'Navbar'>
-            <div>
-            Deni Alexandre's | eShop
-            </div>
+            <div className='Loguito'>Deni Alexandre's | eShop</div>
             <div className="Categories">
                 <button className="Option">Apuntes de ITAM</button>
                 <button className="Option">Consulting Services</button>
