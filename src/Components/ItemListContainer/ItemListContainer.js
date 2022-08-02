@@ -30,7 +30,7 @@ if (loader) {
         <>
             <h1>{greeting}</h1>
             <ItemList products = { products } />
-            <button onClick={() => setShow(!show)}>Show/Hide</button>
+            {/*<button onClick={() => setShow(!show)}>Show/Hide</button>*/}
         </>        
     )
 }
