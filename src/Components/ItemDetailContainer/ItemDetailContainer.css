@@ -3,8 +3,8 @@
     padding: 30px;
     margin: 30px;
     font-size: 10px;
-    background-color: rgb(21, 11, 99);
-    border: 1px solid #a11414;
+    background-color: papayawhip;
+    border: 1px solid #e1e1e1;
     border-radius: 10px;
 }
 
@@ -30,7 +30,7 @@
     width: auto;
     padding: 12px;
     font-size: 8px;
-    background: #5de72b;
+    background: #312be7;
     border-radius: 8px;
     flex: none;
     display: flex;
