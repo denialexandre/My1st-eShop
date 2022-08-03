@@ -2,9 +2,9 @@ const products = [
     {
         id: '1',
         name: 'Evaluación de Proyecto de Inversión',
-        price: 15000,
-        category: 'Consulting Services',
-        img: 'Images/cart.svg',
+        price: '15,000 MXN',
+        category: 'consulting',
+        img: 'https://www.econlink.com.ar/files/evaluacion-proyectos-inversion.png',
         stock: 10,
         description: 'Descripción del servicio profesional blah bla blah',
     },
@@ -12,9 +12,9 @@ const products = [
     {
         id: '2',
         name: 'Investigación de Mercado y Competidores',
-        price: 10000,
-        category: 'Apuntes de ITAM',
-        img: 'Images/cart.svg',
+        price: '10,000 MXN',
+        category: 'consulting',
+        img: 'https://inprofit.es/server/Portal_0033275/img/categories/Analisis-de-mercado-y-competencia.jpg',
         stock: 5,
         description: 'Descripción del servicio profesional blah bla blah',
     },
@@ -22,11 +22,21 @@ const products = [
     {
         id: '3',
         name: 'Mejorar los profits de mi negocio actual',
-        price: 12000,
-        category: 'Miscelaneous',
-        img: 'Images/cart.svg',
+        price: '12,000 MXN',
+        category: 'miscelaneous',
+        img: 'https://www.anfix.com/hs-fs/hubfs/Imported_Blog_Media/incrementar-ingresos-3.jpg?width=563&height=317&name=incrementar-ingresos-3.jpg',
         stock: 7,
         description: 'Descripción del servicio profesional blah bla blah',
+    },
+
+    {
+        id: '4',
+        name: 'Microeconomía avanzada 1 | Apuntes',
+        price: '5,000 MXN',
+        category: 'itam',
+        img: 'https://teaching.weblogs.anu.edu.au/files/2021/09/Exam_pic.jpg',
+        stock: 5,
+        description: 'Apuntes de la clase Microeconomía Avanzada 1 con el Profesor Andrei Gomberg. Además contiente N examenes parciales y examenes finales RESUELTOS y correctos.',
     },
 ]
 
@@ -45,3 +55,11 @@ export const getProductById = (id) => {
         }, 500)
     })
 } 
+
+export const getProductsByCategory = (categoryId) => {
+    return new Promise (resolve => {
+        setTimeout(() => {
+            resolve(products.filter(prod => prod.category === categoryId))
+        }, 500)
+    })
+}
