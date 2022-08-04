@@ -11,9 +11,13 @@ Feel free to take a look to my code and the whole project!
 Steps:
 
 1st. Clone the repository.
+
 2nd. Inside the "Git Bash Terminal" section, type "npm install".
+
 3rd. Once the new modules are installed, type "npm start" in the Terminal section.
+
 4th. It will open the project in a new window so, take a look around and enjoy!
+
 5th. Don't forget to drink some water! It keeps you hydrated!
 
 ## Available Scripts
