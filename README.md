@@ -23,7 +23,7 @@ Steps:
 
 ## Access to YouTube video:
 
-[My 1st. eShop | Project video | ReactJS course]().
+[My 1st. eShop | Project video | ReactJS course](https://youtu.be/BIC0lHBLbzU).
 
 ## Available Scripts
 
