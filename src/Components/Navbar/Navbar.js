@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 const Navbar = () => {
     return(
         <nav className = 'Navbar'>
-                <Link to='/'>Deni Alexandre's | eShop</Link>
+                <Link to='/' className='Loguito'>Deni Alexandre's | eShop</Link>
             <div className="Categories">
                 <Link to='/category/itam' className="Option">Apuntes de ITAM</Link>
                 <Link to='/category/consulting' className="Option">Consulting Services</Link>
