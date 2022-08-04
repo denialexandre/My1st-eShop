@@ -6,11 +6,11 @@ import { useParams } from 'react-router-dom'
 const ItemListContainer = ({ greeting }) => {
     const [products, setProducts] = useState ([])
     const [loader, setLoader] = useState (true)
-    const params = useParams ()
+    const { categoryId} = useParams ()
 
     useEffect (() => {
-        if(params.categoryId) {
-            getProductsByCategory(params.categoryId).then(response => {
+        if(categoryId) {
+            getProductsByCategory(categoryId).then(response => {
                 setProducts (response)
             }).catch(error => {
                 console.log(error)
@@ -26,7 +26,7 @@ const ItemListContainer = ({ greeting }) => {
                 setLoader(false)
             })
         }
-    }, [params.categoryId])
+    }, [categoryId])
 
     if (loader) {
         return <h1>Loading products...</h1>
