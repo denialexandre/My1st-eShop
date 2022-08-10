@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-const MercadoLibre = () => {
+    const MercadoLibre = () => {
     const [products, setProducts] = useState([])
     const [input, setInput] = useState('')
 
@@ -11,25 +11,37 @@ const MercadoLibre = () => {
     //         })
     //         .then(res => setProducts(res.results))
     // }, [])
-    //POR MEDIO DEL MÉTODO "fetch", se puede conectar a un API externa. Sirve para traer valores actuales y 
-    // mejorar la experiencia de los usuarios.
 
-    const handleSearch = () => {
+    const handleSearch = (e) => {
+        console.log(e)
+        e.preventDefault()
         fetch('https://api.mercadolibre.com/sites/MLA/search?q=' + input)
             .then(response => {
                 return response.json()
             })
             .then(res => setProducts(res.results))
     }
+    
+    // const handleKeyDown = (e) => {
+    //     if(e.key === 'a') {
+    //         e.preventDefault()
+    //     }
+    //     console.log(e.target.value)
+    //     setInput(e.target.value)
+    //     console.log(e)
+    // }
 
     return (
-        <>
+            <>
             <h1>MercadoLibre</h1>
-            <input 
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-            />
-            <button onClick={handleSearch}>Search</button>
+            <form onSubmit={handleSearch}>
+                <input 
+                    value={input}
+                    onChange={(e) => setInput(e.target.value)}
+                    // onKeyDown={handleKeyDown}
+                />
+                <button type="submit">Buscar</button>
+            </form>
             {products.map(prod => {
                 return (
                     <div key={prod.id}>

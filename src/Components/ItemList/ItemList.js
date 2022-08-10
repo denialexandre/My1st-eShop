@@ -1,13 +1,16 @@
 import './ItemList.css'
 import Item from '../Item/Item'
 
-const ItemList = ({products, setPage}) => {
+const ItemList = ({products }) => {
+
+    const handleClick = () => {
+        console.log('Click on ItemList')
+    }
 
     return(
-        <div className='ListGroup'>
-            {products.map(prod => <Item key={prod.id} {...prod} setPage={setPage}/>)}
+        <div className='ListGroup' onClick={handleClick}>
+            {products.map(prod => <Item key={prod.id} {...prod} />)}
         </div>    
     )
 }
-
 export default ItemList
