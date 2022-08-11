@@ -8,6 +8,8 @@ const ItemListContainer = ({ greeting }) => {
     const [products, setProducts] = useState([])
     const [loading, setLoading] = useState(true)
 
+    const [title, setTitle] = useState('Take a look around...')
+
     const { categoryId } = useParams()
 
     useEffect(() => {
@@ -23,6 +25,12 @@ const ItemListContainer = ({ greeting }) => {
         })  
     }, [categoryId])
 
+    useEffect(() => {
+        setTimeout(() => {
+            setTitle('Buy something!')
+        }, 5000)
+    }, [])
+
     if(loading) {
         return <h1>Searching products...</h1>
     }
@@ -34,6 +42,7 @@ const ItemListContainer = ({ greeting }) => {
     return (
         <>
             <h1>{`${greeting} ${categoryId || ''}`}</h1>
+            <h2>{title}</h2>
             <ItemList products={products} />
         </>
     )
