@@ -52,10 +52,10 @@
     margin: 0 50px;
     /* TODO */
     width: auto;
-    padding: 12px;
-    font-size: 8px;
-    background: red;
-    border-radius: 8px;
+    padding: 10px;
+    font-size: 20px;
+    background: rgb(51, 0, 255);
+    border-radius: 20px;
     flex: none;
     display: flex;
     order: 1;

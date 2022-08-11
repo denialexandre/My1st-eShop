@@ -6,15 +6,15 @@ export const UserContextProvider = ({ children }) => {
     const [user, setUser] = useState(null)
 
     const login = () => {
-        //logica de login 
+        //Lógica del LogIn 
     }
 
     const logout = () => {
-        //logica logout
+        //Lógica del LogOut
     }
 
     const signup = () => {
-        //logica de registracion
+        //Lógica del SignUp
     }
 
     return (

@@ -24,11 +24,11 @@ const ItemListContainer = ({ greeting }) => {
     }, [categoryId])
 
     if(loading) {
-        return <h1>Cargando productos...</h1>
+        return <h1>Searching products...</h1>
     }
 
     if(products.length === 0) {
-        return categoryId ? <h1>No hay productos en nuestra categoria {categoryId}</h1> : <h1>No hay productos disponibles</h1>
+        return categoryId ? <h1>Ups! There are no more available products for this category: {categoryId}</h1> : <h1>Sorry! No more products available!</h1>
     }
 
     return (

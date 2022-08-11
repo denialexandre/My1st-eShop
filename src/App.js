@@ -16,9 +16,9 @@ function App() {
             <Navbar />
             <Routes>
               <Route path='/' element={<ItemListContainer greeting="Welcome to my eShop!" />}/>
-              <Route path='/category/:categoryId' element={<ItemListContainer greeting="Products by category" />} />
+              <Route path='/category/:categoryId' element={<ItemListContainer greeting="Products by category: " />} />
               <Route path='/detail/:productId' element={<ItemDetailContainer />} />
-              <Route path='/cart' element={<h1>Shopping Cart</h1>} />
+              <Route path='/cart' element={<h1>Check your shopping cart!</h1>} />
             </Routes>
           </BrowserRouter>
         </CartContextProvider>
