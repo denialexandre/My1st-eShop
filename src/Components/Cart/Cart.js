@@ -4,10 +4,10 @@ import { CartContext } from '../../Context/CartContext'
 import CartItem from '../CartItem/CartItem'
 
 const Cart = () => {
-    const { cart, clearCart, getTotal, getQuantity } = useContext(CartContext)  
+    const { cart, clearCart, getTotal, getQuantity, totalQuantity, total } = useContext(CartContext)  
 
-    const totalQuantity = getQuantity()
-    const total = getTotal()
+    //const totalQuantity = getQuantity()
+    //const total = getTotal()
 
     if(totalQuantity === 0) {
         return (
