@@ -1,9 +1,33 @@
-import { useState, createContext } from "react"
+import { useState, useEffect, useRef, createContext } from "react"
 
 export const CartContext = createContext()
 
 export const CartContextProvider = ({ children }) => {
     const [cart, setCart] = useState([])
+    const [totalQuantity, setTotalQuantity] = useState(0)
+    const [total, setTotal] = useState(0)
+
+    const countRendersRef = useRef(0)
+
+    useEffect(() => {
+        console.log(countRendersRef.current)
+        if(countRendersRef.current > 0 ) {
+            console.log('')
+            console.log(countRendersRef.current)
+            let totalQuantity = 0;
+            let total = 0
+            cart.forEach(prod => {
+                totalQuantity += prod.quantity
+                total += prod.quantity * prod.price
+            });
+    
+            setTotalQuantity(totalQuantity)
+            setTotal(total)
+        } else {
+            console.log('1st. render')
+        }
+        countRendersRef.current++
+    }, [cart])
 
     const addItem = (productToAdd) => {
         if(!isInCart(productToAdd.id)) {
@@ -25,14 +49,14 @@ export const CartContextProvider = ({ children }) => {
         }
     }
 
-    const getQuantity = () => {
-        let accu = 0
-        cart.forEach(prod => {
-            accu += prod.quantity
-        })
+    // const getQuantity = () => {
+    //     let accu = 0
+    //     cart.forEach(prod => {
+    //         accu += prod.quantity
+    //     })
 
-        return accu
-    }
+    //     return accu
+    // }
 
     const isInCart = (id) => {
         return cart.some(prod => prod.id === id)
@@ -53,17 +77,17 @@ export const CartContextProvider = ({ children }) => {
         return product?.quantity
     }
 
-    const getTotal = () => {
-        let accu = 0
-        cart.forEach(prod => {
-            accu += prod.quantity * prod.price
-        })
+    // const getTotal = () => {
+    //     let accu = 0
+    //     cart.forEach(prod => {
+    //         accu += prod.quantity * prod.price
+    //     })
 
-        return accu
-    }
+    //     return accu
+    // }
 
-        return (
-            <CartContext.Provider value={{ cart, addItem, isInCart, removeItem, clearCart, getQuantity, getProductQuantity, getTotal }}>
+    return (
+        <CartContext.Provider value={{ cart, addItem, isInCart, removeItem, clearCart, getProductQuantity, totalQuantity, total }}>
             {children}
         </CartContext.Provider> 
     )

@@ -1,6 +1,8 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
+//Hay que importar esto de "getFirestore" para linkearlo al los documentos .js
+//Esto es la conexión al proyecto.
 import { getFirestore } from "firebase/firestore";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -21,4 +23,5 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 
+//Generar la referencia a mi BD que creé en Firebase. Ponerle el "export" al principio.
 export const db = getFirestore(app)

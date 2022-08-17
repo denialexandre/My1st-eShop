@@ -18,7 +18,7 @@ import { db } from '../../Services/Firebase/index'
             const product = { id: response.id, ...values} 
             setProduct(product)
         }).catch(error => {
-            console.log(error)
+            console.log(error)        
         }).finally(() => {
             setLoading(false)
         })

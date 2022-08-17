@@ -2,6 +2,7 @@ import './CartItem.css'
 import { useContext } from 'react'
 import { CartContext } from '../../Context/CartContext'
 
+
 const CartItem = ({ id, name, quantity, price }) => {
     const { removeItem } = useContext(CartContext)
 
@@ -21,12 +22,12 @@ const CartItem = ({ id, name, quantity, price }) => {
                     Quantity: {quantity}
                 </p>
                 <p className="InfoCartItem">
-                    Price per unit: ${price}
+                    Price: ${price} USD
                 </p>
             </section>           
             <footer className='ItemFooterCartItem'>
                 <p className="InfoCartItem">
-                    Subtotal: ${price * quantity}
+                    Subtotal: ${price * quantity} USD
                 </p>
                 <button className='ButtonCartItem' onClick={() => handleRemove(id)}>Delete</button>
             </footer>
