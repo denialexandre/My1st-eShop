@@ -1,19 +1,26 @@
-import { useContext } from "react"
+import './CheckOut.css'
+import { useContext, useState } from 'react'
 import { CartContext } from '../../Context/CartContext'
 import { addDoc, collection, Timestamp,  getDocs, query, where, documentId, writeBatch } from 'firebase/firestore'
 import { db } from '../../Services/Firebase/index'
 
-
 const Checkout = () => {
+
+    const [firstname, setfirstname] = useState('');
+    const [lastname, setlastname] = useState('');
+    const [email, setemail] = useState('');
+    const [mobilephone, setmobilephone] = useState();
+    
     const { cart, clearCart, total } = useContext(CartContext)  
 
     const createOrder = async () => {
         try {
             const objOrder = {
-                buyer: {
-                    name: 'Daenys Alexandre',
-                    phone: '5534147557',
-                    email: 'deni.alexandre.garc@gmail.com'
+                client: {
+                    firstname: 'firstname',
+                    lastname: 'lastname',
+                    mobilephone: 'mobilephone',
+                    email: 'email'
                 },
                 items: cart,
                 total,
@@ -66,7 +73,22 @@ const Checkout = () => {
         <div>
             <h1>Check out</h1>
             <h2>Please, fill this form!</h2>
-            <button className="Button" onClick={createOrder}>Send me my products!</button>
+                <form action="#" method="post" name="form_name" id="form_id" class="form_class" >
+                <label>Name: </label>
+                <input type="text" name="firstname" id="firstname" placeholder="First name" />
+                <br></br>
+                <label>Last name: </label>
+                <input type="text" name="lastname" id="lastname" placeholder="Last name" />
+                <br></br>
+                <label>Email: </label>
+                <input type="text" name="email" id="email" placeholder="Email" />
+                <br></br>
+                <label>Mobile phone: </label>
+                <input type="text" name="mobilephone" id="mobilephone" placeholder="Mobile phone" />
+                <br></br>
+                <br></br>
+                <button className="Button" onClick={createOrder}>Send me my products!</button>
+            </form>            
         </div>
     )
 }
