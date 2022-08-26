@@ -4,7 +4,7 @@ import Navbar from './Components/Navbar/Navbar';
 import ItemListContainer from './Components/ItemListContainer/ItemListContainer';
 import ItemDetailContainer from './Components/ItemDetailContainer/ItemDetailContainer';
 import Cart from './Components/Cart/Cart';
-import Checkout from './Components/CheckOut/CheckOut';
+import CheckOut from './Components/CheckOut/CheckOut';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { CartContextProvider } from './Context/CartContext'
 import { NotificationProvider } from './Notification/Notificaction'
@@ -21,8 +21,7 @@ function App() {
                 <Route path='/category/:categoryId' element={<ItemListContainer greeting="Products by category: " />} />
                 <Route path='/detail/:productId' element={<ItemDetailContainer />} />
                 <Route path='/cart' element={<Cart />}/>
-                <Route path='/checkout' element={<Checkout />}/>
-                <Route path='*' element={<h1>PAGE NOT FOUND 404</h1>} />
+                <Route path='/checkout' element={<CheckOut />}/>
               </Routes>
             </BrowserRouter>
           </CartContextProvider>
@@ -30,4 +29,5 @@ function App() {
     </div>
   );
 }
+
 export default App;

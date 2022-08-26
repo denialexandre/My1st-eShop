@@ -1,96 +1,157 @@
-import './CheckOut.css'
-import { useContext, useState } from 'react'
+import React, { useState, useContext } from "react";
 import { CartContext } from '../../Context/CartContext'
-import { addDoc, collection, Timestamp,  getDocs, query, where, documentId, writeBatch } from 'firebase/firestore'
-import { db } from '../../Services/Firebase/index'
+import { getFirestore, collection, writeBatch, addDoc, Timestamp, doc } from "firebase/firestore";
+import { Link } from "react-router-dom";
 
-const Checkout = () => {
-
-    const [firstname, setfirstname] = useState('');
-    const [lastname, setlastname] = useState('');
-    const [email, setemail] = useState('');
-    const [mobilephone, setmobilephone] = useState();
+const CheckOut = () => {
+    const { cart, clearCart, total } = useContext(CartContext);
+    const [orderId, setOrderId] = useState("");
+    const [creatingOrder, setCreatingOrder] = useState(false);
+    const [formData, setFormData] = useState({
+        name: "",
+        email: "",
+        emailConfirm: "",
+        phone: "",
+    });
     
-    const { cart, clearCart, total } = useContext(CartContext)  
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
 
-    const createOrder = async () => {
-        try {
-            const objOrder = {
-                client: {
-                    firstname: 'firstname',
-                    lastname: 'lastname',
-                    mobilephone: 'mobilephone',
-                    email: 'email'
-                },
-                items: cart,
-                total,
-                date: Timestamp.fromDate(new Date())
-            }
+  const createOrder = (e) =>  {
+    e.preventDefault();
+    setCreatingOrder(true);
+    delete formData.emailConfirm;
+    let order = {};
+    order.date = Timestamp.fromDate(new Date());
+    order.buyer = formData;
+    order.products = cart.map((cartItem) => {
+      const id = cartItem.id;
+      const name = cartItem.name;
+      const price = cartItem.price;
+      const quantity = cartItem.quantity;
+      const totalPrice = cartItem.price * cartItem.quantity;  
+      return { id, name, price, quantity, totalPrice };
+    });
 
-            const ids = cart.map(prod => prod.id)
+    const firestoreDb = getFirestore();
+    const orderCollection = collection(firestoreDb, "orders");
+    addDoc(orderCollection, order)
+      .then((resp) => setOrderId(resp.id))
+      .catch((err) => console.log(err))
+      .finally(() => {        
+        clearCart();
+        updateStock();
+        setCreatingOrder(false);
+        setFormData({
+          name: "",
+          email: "",
+          emailConfirm: "",
+          phone: "",
+        });
+      });
 
-            const productsRef = collection(db, 'products')
+    function updateStock() {
+      const batch = writeBatch(firestoreDb);
 
-            const productsAddedFromFirestore = await getDocs(query(productsRef, where(documentId(), 'in', ids)))
+      order.items.map((el) => {
+        let updateDoc = doc(firestoreDb, "products", el.id);
+        let currentStock = cart.find((item) => item.id === el.id).stock;
 
-            const { docs } = productsAddedFromFirestore
+        batch.update(updateDoc, {
+          stock: currentStock - el.quantity,
+        });
+      });
+          batch.commit();
+      }  
+    };
 
-            const outOfStock = []
-
-            const batch = writeBatch(db)
-
-            docs.forEach(doc => {
-                const dataDoc = doc.data()
-                const stockDb = dataDoc.stock
-
-                const productAdded = cart.find(prod => prod.id === doc.id)
-                const prodQuaantity = productAdded?.quantity
-
-                if(stockDb >= prodQuaantity) {
-                    batch.update(doc.ref, { stock: stockDb - prodQuaantity})
-                } else {
-                    outOfStock.push({ id: doc.id, ...dataDoc})
-                }
-            })
-
-            if(outOfStock.length === 0) {
-                const orderRef = collection(db, 'orders')
-                const orderAdded = await addDoc(orderRef, objOrder)
-                batch.commit()
-                console.log(orderAdded.id)
-                clearCart()
-            } else {
-                console.log('There are out of stock products')
-            }
-        } catch (error) {
-            console.log(error)
-        } finally {
-            console.log('Function "createOrder has finished the process')
-        }
-    }
-
-    return (
-        <div>
-            <h1>Check out</h1>
-            <h2>Please, fill this form!</h2>
-                <form action="#" method="post" name="form_name" id="form_id" class="form_class" >
-                <label>Name: </label>
-                <input type="text" name="firstname" id="firstname" placeholder="First name" />
-                <br></br>
-                <label>Last name: </label>
-                <input type="text" name="lastname" id="lastname" placeholder="Last name" />
-                <br></br>
-                <label>Email: </label>
-                <input type="text" name="email" id="email" placeholder="Email" />
-                <br></br>
-                <label>Mobile phone: </label>
-                <input type="text" name="mobilephone" id="mobilephone" placeholder="Mobile phone" />
-                <br></br>
-                <br></br>
-                <button className="Button" onClick={createOrder}>Send me my products!</button>
-            </form>            
+  return (
+    <>
+      {creatingOrder ? (
+        <div className="container">
+          <div className="py-5 text-center mt-5">
+            <h2 className="mt-5">Thanks for your purchase!</h2>
+            <h4 className="my-5">La compra se ha realizado exitosamente.</h4>
+            <strong>Se te enviará por correo un enlace para agendar la primera cita de entendimiento para armar tu caso de negocio.</strong>
+            <br />
+            <br />
+            <br />
+            <br />
+            <Link className="btn btn-danger bg-gradient mt-5" to={`/`}>
+              <strong>Continue shopping</strong>
+            </Link>
+          </div>
         </div>
-    )
-}
+      ) : (
+        <div>
+          Please, fill this form to continue your checkout!
+          <div className="container mt-5 form_container d-flex">
+            <div className="container align-self-center position-relative">
+              <div className="row">
+                <div className="col-12">
+                  <form
+                    className="d-flex flex-column"
+                    onSubmit={createOrder}
+                    onChange={handleChange}
+                  >
+                    <div className="mb-3 d-flex flex-column align-items-center">
+                      <label className="form-label">Full name</label>
+                      <input
+                        type="name"
+                        className="form-control form-control--color"
+                        name="name"
+                        placeholder="Jon Doe"
+                        defaultValue={formData.name}
+                        required
+                      />
+                    </div>
+                    <div className="mb-3 d-flex flex-column align-items-center">
+                      <label className="form-label">Mobile phone</label>
+                      <input
+                        type="name"
+                        className="form-control form-control--color"
+                        name="phone"
+                        placeholder="55 1234 5678"
+                        defaultValue={formData.phone}
+                        required
+                      />
+                    </div>
+                    <div className="mb-3 d-flex flex-column align-items-center">
+                      <label className="form-label">Email</label>
+                      <input
+                        type="name"
+                        className="form-control form-control--color"
+                        name="email"
+                        placeholder="mail@mail.com"
+                        defaultValue={formData.email}
+                        required
+                      />
+                    </div>
+                    <div className="mb-3 d-flex flex-column align-items-center">
+                      <label className="form-label">Confirm email</label>
+                      <input
+                        type="name"
+                        className="form-control form-control--color"
+                        name="emailConfirm"
+                        placeholder="mail@mail.com"
+                        defaultValue={formData.emailConfirm}
+                        required
+                      />
+                    </div>
+                    <button className="Button" onClick={createOrder}>Send me my products!</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
+  );
+};
 
-export default Checkout
+export default CheckOut;
