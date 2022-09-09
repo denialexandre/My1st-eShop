@@ -4,7 +4,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 This project is about a small eCommerce example an it is designed and developed usuing ReactJS.
 
-It also uses "react-router-dom".
+It also uses "react-router-dom". Hola
 
 Feel free to take a look to my code and the whole project!
 
