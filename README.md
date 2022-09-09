@@ -29,7 +29,7 @@ These videos are a functional review/demonstration of the project:
 
 1st. delivery, August 2022: [My 1st. eShop | Project video | ReactJS course](https://youtu.be/BIC0lHBLbzU).
 
-Final delivery, September 2022: [My 1st. eShop | Project video | ReactJS course](https://youtu.be/BIC0lHBLbzU).
+Final delivery, September 2022: [My 1st. eShop | Final Project video | ReactJS course](https://youtu.be/wY9703lJTfc).
 
 Description
 
