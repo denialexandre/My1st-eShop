@@ -6,6 +6,8 @@ This project is about a small eCommerce example an it is designed and developed 
 
 It also uses "react-router-dom".
 
+And it is connected to FireBase (Cloud Firestore) where the products are listed.
+
 Feel free to take a look to my code and the whole project!
 
 Steps:
