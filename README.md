@@ -1,10 +1,14 @@
+<<<<<<< HEAD
 # Getting Started with Create React App | My 1st. eShop Project by Deni Alexandre
+=======
+# Getting Started with Create React App | My 1st. eShop Project
+>>>>>>> f30b4467fe1f38cd52786b7708216d9473afdba4
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 This project is about a small eCommerce example an it is designed and developed usuing ReactJS.
 
-It also uses "react-router-dom".
+It also uses "react-router-dom". Hola
 
 Feel free to take a look to my code and the whole project!
 
